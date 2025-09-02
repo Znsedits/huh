@@ -31,20 +31,20 @@ const TypingAnimation = () => {
       if (currentText.length < currentTitle.length) {
         const timeout = setTimeout(() => {
           setCurrentText(currentTitle.slice(0, currentText.length + 1))
-        }, 80) // 80ms per character typing speed (faster)
+        }, 70) // 70ms per character typing speed (faster)
         return () => clearTimeout(timeout)
       } else {
-        // Finished typing, pause for 1200ms then start erasing
+        // Finished typing, pause for 1000ms then start erasing
         const timeout = setTimeout(() => {
           setIsTyping(false)
-        }, 1200) // 1.2 second pause after completing title
+        }, 1000) // 1 second pause after completing title
         return () => clearTimeout(timeout)
       }
     } else {
       if (currentText.length > 0) {
         const timeout = setTimeout(() => {
           setCurrentText(currentText.slice(0, -1))
-        }, 50) // 50ms per character deletion speed (faster than typing)
+        }, 40) // 40ms per character deletion speed (faster than typing)
         return () => clearTimeout(timeout)
       } else {
         // Finished erasing, move to next title in continuous loop
@@ -63,7 +63,7 @@ const TypingAnimation = () => {
   }, [])
 
   return (
-    <div className="text-lg md:text-xl lg:text-2xl font-light text-cyan-300 min-h-[2rem] md:min-h-[2.5rem] lg:min-h-[3rem]">
+    <div className="text-lg md:text-xl lg:text-2xl font-light text-cyan-300 min-h-[2rem] md:min-h-[2.5rem] lg:min-h-[3rem] mb-6">
       {currentText}
       <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100 ml-1`}>|</span>
     </div>
