@@ -32,30 +32,30 @@ const TypingAnimation = () => {
       if (currentText.length < currentTitle.length) {
         const timeout = setTimeout(() => {
           setCurrentText(currentTitle.slice(0, currentText.length + 1))
-        }, 50) // 50ms typing speed
+        }, 50) // 50ms per character typing speed
         return () => clearTimeout(timeout)
       } else {
-        // Finished typing, wait then start erasing
+        // Finished typing, pause for 2000ms then start erasing
         const timeout = setTimeout(() => {
           setIsTyping(false)
-        }, 2000)
+        }, 2000) // 2 second pause after completing title
         return () => clearTimeout(timeout)
       }
     } else {
       if (currentText.length > 0) {
         const timeout = setTimeout(() => {
           setCurrentText(currentText.slice(0, -1))
-        }, 30) // Faster erasing
+        }, 30) // 30ms per character deletion speed (faster than typing)
         return () => clearTimeout(timeout)
       } else {
-        // Finished erasing, move to next title
+        // Finished erasing, move to next title in continuous loop
         setCurrentTitleIndex((prev) => (prev + 1) % titles.length)
         setIsTyping(true)
       }
     }
   }, [currentText, isTyping, currentTitleIndex, titles])
 
-  // Cursor blink effect
+  // Cursor blink effect (530ms interval for natural blink)
   useEffect(() => {
     const interval = setInterval(() => {
       setShowCursor(prev => !prev)
@@ -63,25 +63,39 @@ const TypingAnimation = () => {
     return () => clearInterval(interval)
   }, [])
 
-  // Smart grammar handling
-  const getArticle = (text) => {
-    if (!text) return 'I am'
-    const firstWord = text.split(' ')[3] // Get the word after "I am a/an"
-    if (!firstWord) return 'I am'
+  // Smart grammar handling: automatically use 'a' vs 'an' based on the title
+  const getArticleText = (text) => {
+    if (!text || text.length < 5) return text
     
-    const vowels = ['a', 'e', 'i', 'o', 'u']
-    const startsWithVowel = vowels.includes(firstWord.toLowerCase()[0])
-    
-    if (text.includes('I am a') || text.includes('I am an')) {
-      return text.replace(/I am (a|an)/, `I am ${startsWithVowel ? 'an' : 'a'}`)
+    // Check if we have reached the article part
+    if (text.startsWith('I am ')) {
+      const remainingText = text.substring(5) // Remove "I am "
+      
+      if (remainingText.length === 0) return text
+      
+      // Define vowels for 'an' vs 'a' decision
+      const vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+      const firstChar = remainingText[0]
+      
+      // Special handling for specific words
+      if (remainingText.startsWith('AI') || remainingText.startsWith('IIT')) {
+        return `I am an ${remainingText}`
+      }
+      
+      // General vowel/consonant rule
+      const shouldUseAn = vowels.includes(firstChar)
+      const article = shouldUseAn ? 'an' : 'a'
+      
+      return `I am ${article} ${remainingText}`
     }
+    
     return text
   }
 
   return (
     <div className="text-2xl md:text-4xl lg:text-5xl font-light text-cyan-300 min-h-[3rem] md:min-h-[4rem] lg:min-h-[5rem]">
-      {getArticle(currentText)}
-      <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>|</span>
+      {getArticleText(currentText)}
+      <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100 ml-1`}>|</span>
     </div>
   )
 }
