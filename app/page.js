@@ -367,55 +367,41 @@ export default function Portfolio() {
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12">Skills & Technologies</h2>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Technical Skills */}
-            <div>
-              <h3 className="text-2xl font-semibold text-cyan-300 mb-6 flex items-center">
-                <Zap className="w-6 h-6 mr-2" />
+            <div className="space-y-6">
+              <h3 className="text-2xl font-semibold text-cyan-300 mb-8 flex items-center">
+                <Zap className="w-6 h-6 mr-3" />
                 Technical Skills
               </h3>
-              <div className="flex flex-wrap gap-3">
-                <SkillBadge skill="Python" icon={Zap} />
-                <SkillBadge skill="C++" icon={Zap} />
-                <SkillBadge skill="N8n" icon={Zap} />
-                <SkillBadge skill="AI Agents" icon={Zap} />
-                <SkillBadge skill="Excel" icon={BarChart3} />
-                <SkillBadge skill="IBM Cognos" icon={BarChart3} />
-                <SkillBadge skill="Google Looker Studio" icon={BarChart3} />
-                <SkillBadge skill="Unity" icon={Gamepad2} />
-                <SkillBadge skill="Game Design" icon={Gamepad2} />
+              <div className="grid gap-4">
+                <SkillCard skill="Python" icon={Zap} category="Programming Language" />
+                <SkillCard skill="C++" icon={Zap} category="Programming Language" />
+                <SkillCard skill="N8n" icon={Zap} category="Automation Platform" />
+                <SkillCard skill="AI Agents" icon={Zap} category="Artificial Intelligence" />
+                <SkillCard skill="Excel" icon={BarChart3} category="Data Analysis" />
+                <SkillCard skill="IBM Cognos" icon={BarChart3} category="Business Intelligence" />
+                <SkillCard skill="Google Looker Studio" icon={BarChart3} category="Data Visualization" />
+                <SkillCard skill="Unity" icon={Gamepad2} category="Game Development" />
+                <SkillCard skill="Game Design" icon={Gamepad2} category="Interactive Media" />
               </div>
             </div>
 
-            {/* Creative Skills */}
-            <div>
-              <h3 className="text-2xl font-semibold text-cyan-300 mb-6 flex items-center">
-                <Play className="w-6 h-6 mr-2" />
-                Creative Skills
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                <SkillBadge skill="Video Editing" icon={Play} />
-                <SkillBadge skill="Graphic Design" icon={Play} />
-                <SkillBadge skill="Thumbnail Design" icon={Play} />
-                <SkillBadge skill="Audio Refinement" icon={Play} />
-                <SkillBadge skill="Color Grading" icon={Play} />
-                <SkillBadge skill="Storytelling" icon={Play} />
-              </div>
-            </div>
-
-            {/* Soft Skills */}
-            <div>
-              <h3 className="text-2xl font-semibold text-cyan-300 mb-6 flex items-center">
-                <User className="w-6 h-6 mr-2" />
+            {/* Leadership & Soft Skills */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-semibold text-cyan-300 mb-8 flex items-center">
+                <User className="w-6 h-6 mr-3" />
                 Leadership & Soft Skills
               </h3>
-              <div className="flex flex-wrap gap-3">
-                <SkillBadge skill="Leadership" icon={User} />
-                <SkillBadge skill="Problem Solving" icon={User} />
-                <SkillBadge skill="Entrepreneurship" icon={User} />
-                <SkillBadge skill="Client Management" icon={User} />
-                <SkillBadge skill="Project Management" icon={User} />
-                <SkillBadge skill="Innovation" icon={User} />
+              <div className="grid gap-4">
+                <SkillCard skill="Leadership" icon={User} category="Team Management" />
+                <SkillCard skill="Problem Solving" icon={User} category="Critical Thinking" />
+                <SkillCard skill="Entrepreneurship" icon={User} category="Business Development" />
+                <SkillCard skill="Client Management" icon={User} category="Relationship Building" />
+                <SkillCard skill="Project Management" icon={User} category="Organizational" />
+                <SkillCard skill="Innovation" icon={User} category="Creative Strategy" />
+                <SkillCard skill="Strategic Planning" icon={User} category="Vision & Execution" />
+                <SkillCard skill="Communication" icon={User} category="Interpersonal" />
               </div>
             </div>
           </div>
