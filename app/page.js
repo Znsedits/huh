@@ -286,18 +286,18 @@ export default function Portfolio() {
       </section>
 
       {/* ZNS Nexus Section */}
-      <section id="zns-nexus" className="py-20 bg-slate-900/50">
+      <section id="zns-nexus" className="py-20 bg-slate-900/50 hover:bg-slate-900/60 transition-all duration-300">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12">ZNS Nexus</h2>
-          <p className="text-xl text-slate-300 text-center mb-12 max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12 hover:text-cyan-200 transition-colors duration-300">ZNS Nexus</h2>
+          <p className="text-xl text-slate-300 text-center mb-12 max-w-3xl mx-auto hover:text-slate-200 transition-colors duration-300">
             Creative and technical partnership solutions demonstrating versatility across multiple client needs and industries.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Client 1 */}
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50 border-slate-700 hover:border-cyan-500/60 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out">
               <CardHeader>
-                <CardTitle className="text-xl text-cyan-300 flex items-center">
+                <CardTitle className="text-xl text-cyan-300 flex items-center hover:text-cyan-200 transition-colors duration-300">
                   <GraduationCap className="w-6 h-6 mr-2" />
                   Tuition Institute Partnership
                 </CardTitle>
@@ -306,7 +306,7 @@ export default function Portfolio() {
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-slate-200 mb-2">Creative Services</h4>
-                    <ul className="text-slate-300 space-y-1">
+                    <ul className="text-slate-300 space-y-1 hover:text-slate-200 transition-colors duration-300">
                       <li>• Professional video editing and production</li>
                       <li>• Custom graphic design and branding</li>
                       <li>• Engaging thumbnail design for digital content</li>
@@ -314,7 +314,7 @@ export default function Portfolio() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-200 mb-2">AI Automation</h4>
-                    <ul className="text-slate-300 space-y-1">
+                    <ul className="text-slate-300 space-y-1 hover:text-slate-200 transition-colors duration-300">
                       <li>• Automated monthly fee reminder system</li>
                       <li>• Parent communication management</li>
                       <li>• Administrative workflow optimization</li>
@@ -325,9 +325,9 @@ export default function Portfolio() {
             </Card>
 
             {/* Client 2 */}
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50 border-slate-700 hover:border-cyan-500/60 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out">
               <CardHeader>
-                <CardTitle className="text-xl text-cyan-300 flex items-center">
+                <CardTitle className="text-xl text-cyan-300 flex items-center hover:text-cyan-200 transition-colors duration-300">
                   <Play className="w-6 h-6 mr-2" />
                   Fashion Short Film Series
                 </CardTitle>
@@ -336,7 +336,7 @@ export default function Portfolio() {
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-slate-200 mb-2">Post-Production Excellence</h4>
-                    <ul className="text-slate-300 space-y-1">
+                    <ul className="text-slate-300 space-y-1 hover:text-slate-200 transition-colors duration-300">
                       <li>• Complete first-cut editing for each episode</li>
                       <li>• Professional audio refinement and mixing</li>
                       <li>• Color grading and visual enhancement</li>
@@ -344,7 +344,7 @@ export default function Portfolio() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-200 mb-2">Creative Standards</h4>
-                    <ul className="text-slate-300 space-y-1">
+                    <ul className="text-slate-300 space-y-1 hover:text-slate-200 transition-colors duration-300">
                       <li>• Professional storytelling for short-format content</li>
                       <li>• Structure, precision, and innovation focus</li>
                       <li>• Creative media production excellence</li>
