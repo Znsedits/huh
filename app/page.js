@@ -16,9 +16,7 @@ const TypingAnimation = () => {
     'I am an IITian',
     'I am a computer science enthusiast',
     'I am an AI automator',
-    'I am a leader',
-    'I am an entrepreneur',
-    'I am a problem solver'
+    'I am a leader'
   ]
 
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0)
@@ -33,20 +31,20 @@ const TypingAnimation = () => {
       if (currentText.length < currentTitle.length) {
         const timeout = setTimeout(() => {
           setCurrentText(currentTitle.slice(0, currentText.length + 1))
-        }, 50) // 50ms per character typing speed
+        }, 80) // 80ms per character typing speed (faster)
         return () => clearTimeout(timeout)
       } else {
-        // Finished typing, pause for 2000ms then start erasing
+        // Finished typing, pause for 1200ms then start erasing
         const timeout = setTimeout(() => {
           setIsTyping(false)
-        }, 2000) // 2 second pause after completing title
+        }, 1200) // 1.2 second pause after completing title
         return () => clearTimeout(timeout)
       }
     } else {
       if (currentText.length > 0) {
         const timeout = setTimeout(() => {
           setCurrentText(currentText.slice(0, -1))
-        }, 30) // 30ms per character deletion speed (faster than typing)
+        }, 50) // 50ms per character deletion speed (faster than typing)
         return () => clearTimeout(timeout)
       } else {
         // Finished erasing, move to next title in continuous loop
@@ -65,7 +63,7 @@ const TypingAnimation = () => {
   }, [])
 
   return (
-    <div className="text-2xl md:text-4xl lg:text-5xl font-light text-cyan-300 min-h-[3rem] md:min-h-[4rem] lg:min-h-[5rem]">
+    <div className="text-lg md:text-xl lg:text-2xl font-light text-cyan-300 min-h-[2rem] md:min-h-[2.5rem] lg:min-h-[3rem]">
       {currentText}
       <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100 ml-1`}>|</span>
     </div>
