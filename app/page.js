@@ -377,7 +377,6 @@ export default function Portfolio() {
                 <SkillCard skill="Excel" icon={BarChart3} category="Data Analysis" />
                 <SkillCard skill="IBM Cognos" icon={BarChart3} category="Business Intelligence" />
                 <SkillCard skill="Google Looker Studio" icon={BarChart3} category="Data Visualization" />
-                <SkillCard skill="Unity" icon={Gamepad2} category="Game Development" />
                 <SkillCard skill="Game Design" icon={Gamepad2} category="Interactive Media" />
               </div>
             </div>
