@@ -268,8 +268,8 @@ export default function Portfolio() {
             {/* Nightmare Saga - Placeholder */}
             <ProjectCard
               title="Nightmare Saga: Dream 1"
-              description="An immersive game development project featuring atmospheric storytelling, complex mechanics, and innovative gameplay elements."
-              tech={['Game Development', 'Unity', 'C#', 'Game Design']}
+              description="An immersive game development project featuring atmospheric storytelling, complex mechanics, and innovative gameplay elements built with Unreal Engine."
+              tech={['Game Development', 'Unreal Engine', 'C++', 'Blueprints', 'Game Design']}
               image="https://images.pexels.com/photos/2422556/pexels-photo-2422556.jpeg"
             />
 
