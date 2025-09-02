@@ -75,14 +75,14 @@ const TypingAnimation = () => {
       
       // Define vowels for 'an' vs 'a' decision
       const vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
-      const firstChar = remainingText[0]
       
-      // Special handling for specific words
+      // Special handling for specific words that need 'an'
       if (remainingText.startsWith('AI') || remainingText.startsWith('IIT')) {
         return `I am an ${remainingText}`
       }
       
-      // General vowel/consonant rule
+      // For other words, check the first character
+      const firstChar = remainingText[0]
       const shouldUseAn = vowels.includes(firstChar)
       const article = shouldUseAn ? 'an' : 'a'
       
