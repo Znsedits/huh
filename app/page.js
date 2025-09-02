@@ -176,20 +176,20 @@ export default function Portfolio() {
       >
         <div className={`text-center transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} max-w-4xl px-4`}>
           {/* Name */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
             Ziyan Solanki
           </h1>
+          
+          {/* Typing Animation */}
+          <div className="mb-8">
+            <TypingAnimation />
+          </div>
           
           {/* Static Description */}
           <p className="text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 leading-relaxed max-w-3xl mx-auto">
             Passionate about AI-driven workflow automation, prompt engineering, and game development. 
             Building innovative solutions with modern technologies in Computer Science.
           </p>
-          
-          {/* Typing Animation */}
-          <div className="mb-8">
-            <TypingAnimation />
-          </div>
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
