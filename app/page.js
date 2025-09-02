@@ -403,27 +403,27 @@ export default function Portfolio() {
       </section>
 
       {/* Education Section */}
-      <section id="education" className="py-20 bg-slate-900/50">
+      <section id="education" className="py-20 bg-slate-900/50 hover:bg-slate-900/60 transition-all duration-300">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12">Education & Certifications</h2>
+          <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12 hover:text-cyan-200 transition-colors duration-300">Education & Certifications</h2>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Education */}
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50 border-slate-700 hover:border-cyan-500/60 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out">
               <CardHeader>
-                <CardTitle className="text-xl text-cyan-300 flex items-center">
+                <CardTitle className="text-xl text-cyan-300 flex items-center hover:text-cyan-200 transition-colors duration-300">
                   <GraduationCap className="w-6 h-6 mr-2" />
                   Education
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div>
+                  <div className="hover:bg-slate-700/30 p-3 rounded-lg transition-all duration-300">
                     <h4 className="font-semibold text-slate-200">Bachelor's in Computer Science</h4>
                     <p className="text-slate-300">TCET Mumbai</p>
                     <p className="text-slate-400 text-sm">Ongoing</p>
                   </div>
-                  <div>
+                  <div className="hover:bg-slate-700/30 p-3 rounded-lg transition-all duration-300">
                     <h4 className="font-semibold text-slate-200">Bachelor's in Computer Science</h4>
                     <p className="text-slate-300">IIT Patna</p>
                     <p className="text-slate-400 text-sm">Ongoing</p>
@@ -433,21 +433,21 @@ export default function Portfolio() {
             </Card>
 
             {/* Certifications */}
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50 border-slate-700 hover:border-cyan-500/60 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out">
               <CardHeader>
-                <CardTitle className="text-xl text-cyan-300 flex items-center">
+                <CardTitle className="text-xl text-cyan-300 flex items-center hover:text-cyan-200 transition-colors duration-300">
                   <Award className="w-6 h-6 mr-2" />
                   Certifications
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div>
+                  <div className="hover:bg-slate-700/30 p-3 rounded-lg transition-all duration-300">
                     <h4 className="font-semibold text-slate-200">IBM Data Analyst Professional Certificate</h4>
                     <p className="text-slate-300">IBM</p>
                     <p className="text-slate-400 text-sm">In Progress</p>
                   </div>
-                  <div>
+                  <div className="hover:bg-slate-700/30 p-3 rounded-lg transition-all duration-300">
                     <h4 className="font-semibold text-slate-200">Virtual Experience Programs</h4>
                     <p className="text-slate-300">Multiple Industry Partners</p>
                     <p className="text-slate-400 text-sm">Completed Various Programs</p>
