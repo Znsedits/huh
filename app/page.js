@@ -174,24 +174,35 @@ export default function Portfolio() {
           backgroundPosition: 'center'
         }}
       >
-        <div className={`text-center transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+        <div className={`text-center transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} max-w-4xl px-4`}>
+          {/* Name */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
             Ziyan Solanki
           </h1>
+          
+          {/* Static Description */}
+          <p className="text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 leading-relaxed max-w-3xl mx-auto">
+            Passionate about AI-driven workflow automation, prompt engineering, and game development. 
+            Building innovative solutions with modern technologies in Computer Science.
+          </p>
+          
+          {/* Typing Animation */}
           <div className="mb-8">
             <TypingAnimation />
           </div>
+          
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               onClick={() => scrollToSection('projects')}
-              className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 text-lg"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 text-lg hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25"
             >
               View My Work
             </Button>
             <Button 
               onClick={() => scrollToSection('contact')}
               variant="outline" 
-              className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/10 px-8 py-3 text-lg"
+              className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/10 px-8 py-3 text-lg hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25"
             >
               Get In Touch
             </Button>
