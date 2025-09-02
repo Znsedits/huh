@@ -11,7 +11,8 @@ import os
 from typing import Dict, Any, List
 
 # Get base URL from environment or use default
-BASE_URL = os.getenv('NEXT_PUBLIC_BASE_URL', 'https://creative-coder-15.preview.emergentagent.com')
+# For testing, use localhost since we're running in the same container
+BASE_URL = "http://localhost:3000"
 API_BASE = f"{BASE_URL}/api"
 
 class PortfolioAPITester:
