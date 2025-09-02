@@ -101,3 +101,89 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test the backend API endpoints for the portfolio website. The backend has several endpoints: /api/health, /api/contact, /api/projects, and /api/contact-form (POST). Focus on testing all GET endpoints return proper JSON responses, testing the POST endpoint handles requests correctly, verifying response formats match expected structure, and checking that error handling works for invalid endpoints."
+
+backend:
+  - task: "Health endpoint API"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Health endpoint implemented at /api/health - needs testing to verify JSON response format and status"
+
+  - task: "Contact information API"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Contact endpoint implemented at /api/contact - needs testing to verify JSON response with email, linkedin, github fields"
+
+  - task: "Projects data API"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Projects endpoint implemented at /api/projects - needs testing to verify JSON array response with project data structure"
+
+  - task: "Contact form submission API"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Contact form POST endpoint implemented at /api/contact-form - needs testing to verify POST request handling and response format"
+
+  - task: "Error handling for invalid endpoints"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Error handling implemented for invalid endpoints - needs testing to verify 404 responses for non-existent endpoints"
+
+frontend:
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Health endpoint API"
+    - "Contact information API"
+    - "Projects data API"
+    - "Contact form submission API"
+    - "Error handling for invalid endpoints"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "testing"
+      message: "Created initial test structure for portfolio website backend API endpoints. All endpoints are implemented and ready for testing. Will create backend_test.py and test all API endpoints systematically."
