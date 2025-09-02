@@ -216,16 +216,16 @@ export default function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-slate-900/50">
+      <section id="about" className="py-20 bg-slate-900/50 hover:bg-slate-900/60 transition-all duration-300">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12">About Me</h2>
+          <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12 hover:text-cyan-200 transition-colors duration-300">About Me</h2>
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-xl text-slate-300 mb-8 leading-relaxed">
+            <p className="text-xl text-slate-300 mb-8 leading-relaxed hover:text-slate-200 transition-colors duration-300">
               I'm a versatile Computer Science student and creative technologist, pursuing dual bachelor's programs 
               at TCET Mumbai & IIT Patna. I specialize in AI workflow automation, game development, and data analytics, 
               bringing innovative solutions to complex problems across multiple domains.
             </p>
-            <p className="text-lg text-slate-400 leading-relaxed">
+            <p className="text-lg text-slate-400 leading-relaxed hover:text-slate-300 transition-colors duration-300">
               Through ZNS Nexus, I've partnered with multiple clients, delivering comprehensive creative and technical services 
               ranging from AI automation systems to professional video editing and graphic design.
             </p>
