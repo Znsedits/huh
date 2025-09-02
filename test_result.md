@@ -187,6 +187,8 @@ metadata:
   version: "1.0"
   test_sequence: 1
   run_ui: false
+  last_tested: "2025-09-02"
+  backend_status: "all_passed"
 
 test_plan:
   current_focus: []
