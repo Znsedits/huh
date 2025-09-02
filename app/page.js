@@ -8,6 +8,7 @@ import { Github, Linkedin, Mail, ExternalLink, Play, BarChart3, Gamepad2, Zap, U
 import Link from 'next/link'
 
 const TypingAnimation = () => {
+  // Pre-corrected titles with proper grammar
   const titles = [
     'I am a game developer',
     'I am a data analyst', 
@@ -63,38 +64,9 @@ const TypingAnimation = () => {
     return () => clearInterval(interval)
   }, [])
 
-  // Smart grammar handling: automatically use 'a' vs 'an' based on the title
-  const getArticleText = (text) => {
-    if (!text || text.length < 5) return text
-    
-    // Check if we have reached the article part
-    if (text.startsWith('I am ')) {
-      const remainingText = text.substring(5) // Remove "I am "
-      
-      if (remainingText.length === 0) return text
-      
-      // Define vowels for 'an' vs 'a' decision
-      const vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
-      
-      // Special handling for specific words that need 'an'
-      if (remainingText.startsWith('AI') || remainingText.startsWith('IIT')) {
-        return `I am an ${remainingText}`
-      }
-      
-      // For other words, check the first character
-      const firstChar = remainingText[0]
-      const shouldUseAn = vowels.includes(firstChar)
-      const article = shouldUseAn ? 'an' : 'a'
-      
-      return `I am ${article} ${remainingText}`
-    }
-    
-    return text
-  }
-
   return (
     <div className="text-2xl md:text-4xl lg:text-5xl font-light text-cyan-300 min-h-[3rem] md:min-h-[4rem] lg:min-h-[5rem]">
-      {getArticleText(currentText)}
+      {currentText}
       <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100 ml-1`}>|</span>
     </div>
   )
