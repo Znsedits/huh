@@ -71,7 +71,7 @@ const TypingAnimation = () => {
 }
 
 const ProjectCard = ({ title, description, tech, link, isLive = false, image }) => (
-  <Card className="bg-slate-800/50 border-slate-700 hover:border-cyan-500/50 transition-all duration-300 group">
+  <Card className="bg-slate-800/50 border-slate-700 hover:border-cyan-500/50 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out group">
     <div className="relative overflow-hidden rounded-t-lg">
       <img 
         src={image} 
@@ -86,19 +86,19 @@ const ProjectCard = ({ title, description, tech, link, isLive = false, image }) 
       )}
     </div>
     <CardHeader>
-      <CardTitle className="text-xl text-cyan-300">{title}</CardTitle>
-      <CardDescription className="text-slate-300">{description}</CardDescription>
+      <CardTitle className="text-xl text-cyan-300 group-hover:text-cyan-200 transition-colors duration-300">{title}</CardTitle>
+      <CardDescription className="text-slate-300 group-hover:text-slate-200 transition-colors duration-300">{description}</CardDescription>
     </CardHeader>
     <CardContent>
       <div className="flex flex-wrap gap-2 mb-4">
         {tech.map((t, idx) => (
-          <Badge key={idx} variant="secondary" className="bg-slate-700 text-slate-200">
+          <Badge key={idx} variant="secondary" className="bg-slate-700 text-slate-200 group-hover:bg-slate-600 transition-colors duration-300">
             {t}
           </Badge>
         ))}
       </div>
       {link && (
-        <Button asChild className="bg-cyan-600 hover:bg-cyan-700">
+        <Button asChild className="bg-cyan-600 hover:bg-cyan-700 hover:scale-105 transition-all duration-300">
           <Link href={link} target="_blank" rel="noopener noreferrer">
             {isLive ? 'Try Demo' : 'View Project'}
             <ExternalLink className="w-4 h-4 ml-2" />
