@@ -7,11 +7,38 @@ import { Badge } from '@/components/ui/badge'
 import { Github, Linkedin, Mail, ExternalLink, Play, BarChart3, Gamepad2, Zap, User, GraduationCap, Award, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 
+/**
+ * Git Username & Email Config Help
+ * 
+ * If you see an error like:
+ *   "Please tell me who you are. Run
+ *    git config --global user.email 'you@example.com'
+ *    git config --global user.name 'Your Name'
+ *   to set your account's default identity."
+ * 
+ * 
+ * You need to set your Git username and email.
+ * 
+ * To fix this, open your terminal and run:
+ * 
+ *   git config --global user.name "Your Name"
+ *   git config --global user.email "your@email.com"
+ * 
+ * Replace "Your Name" and "your@email.com" with your actual name and email.
+ * 
+ * If you want to set it only for the current repository, omit --global:
+ * 
+ *   git config user.name "Your Name"
+ *   git config user.email "your@email.com"
+ * 
+ * After setting, try your git command again.
+ */
+
 const TypingAnimation = () => {
   // Pre-corrected titles with proper grammar
   const titles = [
     'I am a game developer',
-    'I am a data analyst', 
+    'I am a data analyst',
     'I am a student',
     'I am an IITian',
     'I am a computer science enthusiast',
@@ -26,33 +53,31 @@ const TypingAnimation = () => {
 
   useEffect(() => {
     const currentTitle = titles[currentTitleIndex]
-    
+
+    let timeout
     if (isTyping) {
       if (currentText.length < currentTitle.length) {
-        const timeout = setTimeout(() => {
+        timeout = setTimeout(() => {
           setCurrentText(currentTitle.slice(0, currentText.length + 1))
-        }, 70) // 70ms per character typing speed (faster)
-        return () => clearTimeout(timeout)
+        }, 70)
       } else {
-        // Finished typing, pause for 1000ms then start erasing
-        const timeout = setTimeout(() => {
+        timeout = setTimeout(() => {
           setIsTyping(false)
-        }, 1000) // 1 second pause after completing title
-        return () => clearTimeout(timeout)
+        }, 1000)
       }
     } else {
       if (currentText.length > 0) {
-        const timeout = setTimeout(() => {
+        timeout = setTimeout(() => {
           setCurrentText(currentText.slice(0, -1))
-        }, 40) // 40ms per character deletion speed (faster than typing)
-        return () => clearTimeout(timeout)
+        }, 40)
       } else {
-        // Finished erasing, move to next title in continuous loop
         setCurrentTitleIndex((prev) => (prev + 1) % titles.length)
         setIsTyping(true)
       }
     }
-  }, [currentText, isTyping, currentTitleIndex, titles])
+    return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentText, isTyping, currentTitleIndex])
 
   // Cursor blink effect (530ms interval for natural blink)
   useEffect(() => {
@@ -62,22 +87,33 @@ const TypingAnimation = () => {
     return () => clearInterval(interval)
   }, [])
 
+  // Initialize the animation when component mounts
+  useEffect(() => {
+    if (currentText === '' && isTyping) {
+      setCurrentText(titles[0].charAt(0))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className="text-lg md:text-xl lg:text-2xl font-light text-cyan-300 min-h-[2rem] md:min-h-[2.5rem] lg:min-h-[3rem] mb-6">
       {currentText}
-      <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100 ml-1`}>|</span>
+      <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100 ml-1`} aria-hidden="true">|</span>
     </div>
   )
 }
 
-const ProjectCard = ({ title, description, tech, link, isLive = false, image }) => (
+const ProjectCard = ({ title, description, tech = [], link, isLive = false, image }) => (
   <Card className="bg-slate-800/50 border-slate-700 hover:border-cyan-500/50 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out group">
     <div className="relative overflow-hidden rounded-t-lg">
-      <img 
-        src={image} 
-        alt={title}
-        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-      />
+      {image && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      )}
       {isLive && (
         <Badge className="absolute top-4 right-4 bg-green-600 hover:bg-green-700">
           <Play className="w-3 h-3 mr-1" />
@@ -91,7 +127,7 @@ const ProjectCard = ({ title, description, tech, link, isLive = false, image }) 
     </CardHeader>
     <CardContent>
       <div className="flex flex-wrap gap-2 mb-4">
-        {tech.map((t, idx) => (
+        {Array.isArray(tech) && tech.map((t, idx) => (
           <Badge key={idx} variant="secondary" className="bg-slate-700 text-slate-200 group-hover:bg-slate-600 transition-colors duration-300">
             {t}
           </Badge>
@@ -113,18 +149,18 @@ const SkillCard = ({ skill, icon: Icon, category }) => (
   <div className="group relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-4 hover:bg-slate-700/60 hover:border-cyan-500/60 hover:shadow-lg hover:shadow-cyan-500/20 hover:scale-105 transition-all duration-300 ease-out cursor-pointer">
     {/* Glow effect overlay */}
     <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-    
+
     {/* Content */}
     <div className="relative flex items-center space-x-3">
       <div className="flex-shrink-0 p-2 bg-slate-700/50 rounded-lg group-hover:bg-cyan-500/20 group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-all duration-300">
-        <Icon className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 group-hover:drop-shadow-lg transition-all duration-300" />
+        {Icon && <Icon className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 group-hover:drop-shadow-lg transition-all duration-300" />}
       </div>
       <div className="flex-1">
         <h4 className="font-medium text-slate-200 group-hover:text-white transition-colors duration-300">{skill}</h4>
         <p className="text-xs text-slate-400 group-hover:text-slate-300 transition-colors duration-300">{category}</p>
       </div>
     </div>
-    
+
     {/* Bottom glow line */}
     <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
   </div>
@@ -140,7 +176,12 @@ export default function Portfolio() {
   }, [])
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    if (typeof window !== 'undefined' && sectionId) {
+      const el = document.getElementById(sectionId)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
   }
 
   return (
@@ -154,8 +195,9 @@ export default function Portfolio() {
               {['About', 'Projects', 'ZNS Nexus', 'Skills', 'Education', 'Contact'].map((item) => (
                 <button
                   key={item}
-                  onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+                  onClick={() => scrollToSection(item.toLowerCase().replace(/\s+/g, '-'))}
                   className="text-slate-300 hover:text-cyan-300 transition-colors"
+                  type="button"
                 >
                   {item}
                 </button>
@@ -166,7 +208,7 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section 
+      <section
         className="min-h-screen flex items-center justify-center relative overflow-hidden"
         style={{
           backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1597733336794-12d05021d510')`,
@@ -179,38 +221,40 @@ export default function Portfolio() {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
             Ziyan Solanki
           </h1>
-          
+
           {/* Typing Animation */}
           <div className="mb-8">
             <TypingAnimation />
           </div>
-          
+
           {/* Static Description */}
           <p className="text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-            Passionate about AI-driven workflow automation, prompt engineering, and game development. 
+            Passionate about AI-driven workflow automation, prompt engineering, and game development.
             Building innovative solutions with modern technologies in Computer Science.
           </p>
-          
+
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            <Button
               onClick={() => scrollToSection('projects')}
               className="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 text-lg hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25"
+              type="button"
             >
               View My Work
             </Button>
-            <Button 
+            <Button
               onClick={() => scrollToSection('contact')}
-              variant="outline" 
+              variant="outline"
               className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/10 px-8 py-3 text-lg hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/25"
+              type="button"
             >
               Get In Touch
             </Button>
           </div>
         </div>
-        
+
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce" aria-hidden="true">
           <ChevronDown className="w-8 h-8 text-cyan-300" />
         </div>
       </section>
@@ -221,12 +265,12 @@ export default function Portfolio() {
           <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12 hover:text-cyan-200 transition-colors duration-300">About Me</h2>
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-xl text-slate-300 mb-8 leading-relaxed hover:text-slate-200 transition-colors duration-300">
-              I'm a versatile Computer Science student and creative technologist, pursuing dual bachelor's programs 
-              at TCET Mumbai & IIT Patna. I specialize in AI workflow automation, game development, and data analytics, 
+              I'm a versatile Computer Science student and creative technologist, pursuing dual bachelor's programs
+              at TCET Mumbai & IIT Patna. I specialize in AI workflow automation, game development, and data analytics,
               bringing innovative solutions to complex problems across multiple domains.
             </p>
             <p className="text-lg text-slate-400 leading-relaxed hover:text-slate-300 transition-colors duration-300">
-              Through ZNS Nexus, I've partnered with multiple clients, delivering comprehensive creative and technical services 
+              Through ZNS Nexus, I've partnered with multiple clients, delivering comprehensive creative and technical services
               ranging from AI automation systems to professional video editing and graphic design.
             </p>
           </div>
@@ -238,7 +282,7 @@ export default function Portfolio() {
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12">Featured Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
+
             {/* FlavorFlow - Live Demo */}
             <ProjectCard
               title="FlavorFlow AI"
@@ -361,7 +405,7 @@ export default function Portfolio() {
       <section id="skills" className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12">Skills & Technologies</h2>
-          
+
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Technical Skills */}
             <div className="space-y-6">
@@ -406,7 +450,7 @@ export default function Portfolio() {
       <section id="education" className="py-20 bg-slate-900/50 hover:bg-slate-900/60 transition-all duration-300">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12 hover:text-cyan-200 transition-colors duration-300">Education & Certifications</h2>
-          
+
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Education */}
             <Card className="bg-slate-800/50 border-slate-700 hover:border-cyan-500/60 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ease-in-out">
@@ -419,12 +463,12 @@ export default function Portfolio() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="hover:bg-slate-700/30 p-3 rounded-lg transition-all duration-300">
-                    <h4 className="font-semibold text-slate-200">Bachelor's in Computer Science</h4>
+                    <h4 className="font-semibold text-slate-200">Bachelor&apos;s in Computer Science</h4>
                     <p className="text-slate-300">TCET Mumbai</p>
                     <p className="text-slate-400 text-sm">Ongoing</p>
                   </div>
                   <div className="hover:bg-slate-700/30 p-3 rounded-lg transition-all duration-300">
-                    <h4 className="font-semibold text-slate-200">Bachelor's in Computer Science</h4>
+                    <h4 className="font-semibold text-slate-200">Bachelor&apos;s in Computer Science</h4>
                     <p className="text-slate-300">IIT Patna</p>
                     <p className="text-slate-400 text-sm">Ongoing</p>
                   </div>
@@ -462,13 +506,13 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section id="contact" className="py-20 hover:bg-slate-900/30 transition-all duration-300">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12 hover:text-cyan-200 transition-colors duration-300">Let's Connect</h2>
-          
+          <h2 className="text-4xl font-bold text-center text-cyan-300 mb-12 hover:text-cyan-200 transition-colors duration-300">Let&apos;s Connect</h2>
+
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xl text-slate-300 mb-8 hover:text-slate-200 transition-colors duration-300">
-              Ready to collaborate on your next project? Let's discuss how we can work together to bring your ideas to life.
+              Ready to collaborate on your next project? Let&apos;s discuss how we can work together to bring your ideas to life.
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <Button asChild className="bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 hover:border-cyan-500 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
                 <Link href="mailto:ziyan@example.com">
@@ -476,14 +520,14 @@ export default function Portfolio() {
                   Email Me
                 </Link>
               </Button>
-              
+
               <Button asChild className="bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 hover:border-cyan-500 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
                 <Link href="https://linkedin.com/in/ziyansolanki" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="w-5 h-5 mr-2" />
                   LinkedIn
                 </Link>
               </Button>
-              
+
               <Button asChild className="bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 hover:border-cyan-500 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
                 <Link href="https://github.com/ZiyanSolanki" target="_blank" rel="noopener noreferrer">
                   <Github className="w-5 h-5 mr-2" />
@@ -493,13 +537,13 @@ export default function Portfolio() {
             </div>
 
             <div className="grid sm:grid-cols-3 gap-4 text-center">
-              <Button className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
+              <Button className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300" type="button">
                 Job Opportunities
               </Button>
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300" type="button">
                 Freelance Work
               </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300" type="button">
                 Collaborations
               </Button>
             </div>
@@ -508,6 +552,16 @@ export default function Portfolio() {
       </section>
 
       {/* Footer */}
+      <footer className="py-8 bg-slate-900 border-t border-slate-700">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-slate-400">
+            © 2025 Ziyan Solanki. Built with Next.js and passion for innovation.
+          </p>
+        </div>
+      </footer>
+    </div>
+  )
+}
       <footer className="py-8 bg-slate-900 border-t border-slate-700">
         <div className="container mx-auto px-4 text-center">
           <p className="text-slate-400">
