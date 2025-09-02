@@ -125,11 +125,25 @@ const ProjectCard = ({ title, description, tech, link, isLive = false, image }) 
   </Card>
 )
 
-const SkillBadge = ({ skill, icon: Icon }) => (
-  <Badge className="bg-slate-800 text-cyan-300 border-cyan-500/30 hover:border-cyan-500 transition-colors px-4 py-2 text-sm">
-    <Icon className="w-4 h-4 mr-2" />
-    {skill}
-  </Badge>
+const SkillCard = ({ skill, icon: Icon, category }) => (
+  <div className="group relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-4 hover:bg-slate-700/60 hover:border-cyan-500/60 hover:shadow-lg hover:shadow-cyan-500/20 hover:scale-105 transition-all duration-300 ease-out cursor-pointer">
+    {/* Glow effect overlay */}
+    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    
+    {/* Content */}
+    <div className="relative flex items-center space-x-3">
+      <div className="flex-shrink-0 p-2 bg-slate-700/50 rounded-lg group-hover:bg-cyan-500/20 group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-all duration-300">
+        <Icon className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 group-hover:drop-shadow-lg transition-all duration-300" />
+      </div>
+      <div className="flex-1">
+        <h4 className="font-medium text-slate-200 group-hover:text-white transition-colors duration-300">{skill}</h4>
+        <p className="text-xs text-slate-400 group-hover:text-slate-300 transition-colors duration-300">{category}</p>
+      </div>
+    </div>
+    
+    {/* Bottom glow line */}
+    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  </div>
 )
 
 export default function Portfolio() {
